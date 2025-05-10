@@ -1,0 +1,36 @@
+services:
+- service: Clusters Service
+  deployment:
+    platform: kubernetes
+    cluster: dev-svc
+    provider: aks
+    aks:
+      resource_id: /subscriptions/1d3378d3-5a3f-4712-85a1-2485495dfc4b/resourceGroups/hcp-underlay-dev-svc/providers/Microsoft.ContainerService/managedClusters/dev-svc
+    namespace: cluster-service
+    service_account_name: clusters-service
+  endpoints:
+    - name: cluster-service-http-internal
+      protocol: http
+      port: 8000
+      type: k8sservice
+      k8s_service_name: clusters-service
+- service: Maestro
+  deployment:
+    platform: kubernetes
+    cluster: dev-svc
+    provider: aks
+    aks:
+      resource_id: /subscriptions/1d3378d3-5a3f-4712-85a1-2485495dfc4b/resourceGroups/hcp-underlay-dev-svc/providers/Microsoft.ContainerService/managedClusters/dev-svc
+    namespace: maestro
+    service_account_name: maestro
+  endpoints:
+    - name: maestro-grpc-internal
+      protocol: grpc
+      port: 8090
+      type: k8sservice
+      k8s_service_name: maestro-grpc
+    - name: maestro-http-internal
+      protocol: http
+      port: 8000
+      type: k8sservice
+      k8s_service_name: maestro

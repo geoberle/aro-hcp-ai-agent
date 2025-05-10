@@ -1,0 +1,15 @@
+[project]
+name = "aro-hcp-agent"
+version = "0.1.0"
+description = "An AI agent experiment for ARO HCP"
+readme = "README.md"
+requires-python = ">=3.11"
+dependencies = [
+    "langchain[openai]",
+    "langchain[ollama]",
+    "langchain-community",
+    "mcp[cli]",
+    "requests",
+    "langgraph",
+    "langchain-mcp-adapters"
+]
